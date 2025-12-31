@@ -1,12 +1,13 @@
 --[[
 🥔 + Esticar Tela | Painel Premium Completo
-- Painel moderno com animações suaves
+- Painel moderno
 - FPS flutuante com cores dinâmicas
 - Barra de progresso animada
-- Slider grande para esticar tela
-- Ícone 🥔 para abrir/fechar painel
-- Mensagens animadas
-- Detecção de dispositivo
+- Slider grande (45–80) para esticar tela
+- Botão fechar + ícone 🥔 para abrir de volta
+- Mensagem "Otimizado com sucesso"
+- Detecção de dispositivo (📱 / 💻)
+- Valor padrão: 65 Mobile, 70 PC
 ]]
 
 local TweenService = game:GetService("TweenService")
@@ -18,9 +19,7 @@ local PlayerGui = LocalPlayer:WaitForChild("PlayerGui")
 
 -- Detecta dispositivo
 local isMobile = UserInputService.TouchEnabled
-
--- Valor inicial do esticar tela
-local stretchValue = isMobile and 65 or 75
+local stretchValue = isMobile and 65 or 70 -- Ajuste de valores padrão
 
 -- GUI principal
 local ScreenGui = Instance.new("ScreenGui", PlayerGui)
@@ -44,7 +43,7 @@ title.Font = Enum.Font.GothamBold
 title.TextScaled = true
 title.BackgroundTransparency = 1
 
--- Status do dispositivo
+-- Status dispositivo
 local statusLabel = Instance.new("TextLabel", mainFrame)
 statusLabel.Size = UDim2.new(0.3,0,0,25)
 statusLabel.Position = UDim2.new(0.05,0,0.1,0)
@@ -113,12 +112,6 @@ sliderValueLabel.TextScaled = true
 local function tweenProgress(percent)
     local goal = {Size = UDim2.new(percent, 0, 1, 0)}
     local tween = TweenService:Create(progressBar, TweenInfo.new(1, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), goal)
-    tween:Play()
-end
-
-local function tweenButton(btn, newColor)
-    local goal = {BackgroundColor3 = newColor}
-    local tween = TweenService:Create(btn, TweenInfo.new(0.5, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), goal)
     tween:Play()
 end
 
